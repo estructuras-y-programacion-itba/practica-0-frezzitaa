@@ -1,16 +1,15 @@
-def generala(d1,d2,d3,d4,d5):
+def generala(lista):
     generala=False
     
-    if d1==d2==d3==d4==d5:
+    if lista[0]==lista[1]==lista[2]==lista[3]==lista[4]:
         generala=True    
         return generala
     else:
         return generala #validar despeus enn otrae funcion si el turno es igiual a 1 o no
 
 
-def escalera(d1,d2,d3,d4,d5):
+def escalera(lista):
     escalera=False
-    lista=[d1,d2,d3,d4,d5]
     lista.sort() #ordena de menor a mayor
     
     for i in range(len(lista)-1):
@@ -21,10 +20,8 @@ def escalera(d1,d2,d3,d4,d5):
     return escalera
         
 
-def poker(d1,d2,d3,d4,d5):
+def poker(lista):
     poker=False
-    lista=[d1,d2,d3,d4,d5]
-    
     for numero in lista:
         contador=0
         for i in range(len(lista)):
@@ -36,17 +33,16 @@ def poker(d1,d2,d3,d4,d5):
     return poker
             
             
-def full(dados):
-    valores_unicos = set(dados)
+def full(lista):
+    valores_unicos = set(lista)
     if len(valores_unicos) != 2:
         return False
-    cantidad = dados.count(dados[0])
+    cantidad = lista.count(lista[0])
     return cantidad in [2, 3]
 
 
-def numero_ind(d1, d2, d3, d4, d5):
-    lista = [d1, d2, d3, d4, d5]
-  
+def numero_ind(lista):
+    
     n1=lista.count(1)*1
     n2=lista.count(2)*2
     n3=lista.count(3)*3
@@ -74,19 +70,19 @@ def tiradas ():
     des5='si'
     while turno<3 and decision!='fin' :
         if des1=='si':
-            d1=random.randint(1,5)
+            d1=random.randint(1,6)
             print (d1)
         if des2=='si':
-            d2=random.randint(1,5)
+            d2=random.randint(1,6)
             print (d2)
         if des3=='si':
-            d3=random.randint(1,5)
+            d3=random.randint(1,6)
             print(d3)
         if des4=='si':
-            d4=random.randint(1,5)
+            d4=random.randint(1,6)
             print (d4)
         if des5=='si':
-            d5=random.randint(1,5)
+            d5=random.randint(1,6)
             print (d5)
         if des1!='no':
             des1= input('escriba "si" para volver a tirar y "no" fijar el dado 1.')
@@ -104,20 +100,9 @@ def tiradas ():
     return turno,dados
             
             
-            sEse'( tupni =
-    desicion     
-
 Ese'( tupni =
     desicion     
 
-Ese'( tupni =
-    desicion     
-
-Ese'( tupni =
-    desicion     
-
-Ese'( tupni =
-    desicion     
 
     
                  
