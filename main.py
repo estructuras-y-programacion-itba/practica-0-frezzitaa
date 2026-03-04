@@ -68,6 +68,8 @@ def tiradas ():
         des4='si'
         des5='si'
         while turno<=3:
+            if turno!=1:
+                decision= input('escriba "fin" para finalizar el turno o deje vacio para continuar.')
             if des1!='no' and turno!=1:
                 des1= input('escriba "si" para volver a tirar y "no" fijar el dado 1.')
             if des2!='no' and turno!=1:
@@ -78,8 +80,6 @@ def tiradas ():
                 des4= input('escriba "si" para volver a tirar y "no" fijar el dado 4.')
             if des5!='no' and turno!=1:
                 des5= input('escriba "si" para volver a tirar y "no" fijar el dado 5.') 
-            if turno!=1:
-                decision= input('escriba "fin" para finalizar el turno o deje vacio.')
             if decision=='fin':
                 break
             turno+=1
