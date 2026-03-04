@@ -70,34 +70,40 @@ def tiradas ():
         while turno<=3:
             if turno!=1:
                 decision= input('escriba "fin" para finalizar el turno o deje vacio para continuar.')
-            if des1!='no' and turno!=1:
+            if turno!=1:
                 des1= input('escriba "si" para volver a tirar y "no" fijar el dado 1.')
-            if des2!='no' and turno!=1:
+            if turno!=1:
                 des2= input('escriba "si" para volver a tirar y "no" fijar el dado 2.') 
-            if des3!='no' and turno!=1:
+            if turno!=1:
                 des3= input('escriba "si" para volver a tirar y "no" fijar el dado 3.')   
-            if des4!='no' and turno!=1:
+            if turno!=1:
                 des4= input('escriba "si" para volver a tirar y "no" fijar el dado 4.')
-            if des5!='no' and turno!=1:
+            if turno!=1:
                 des5= input('escriba "si" para volver a tirar y "no" fijar el dado 5.') 
             if decision=='fin':
                 break
             turno+=1
-            if des1=='si':
+            
+            if des1=="si":
                 d1=random.randint(1,6)
-                print ('valor 1= ' + str(d1))
-            if des2=='si':
+            print ('valor 1= ' + str(d1))
+            
+            if des2=="si":
                 d2=random.randint(1,6)
-                print ('valor 2= ' + str(d2))
-            if des3=='si':
+            print ('valor 2= ' + str(d2))
+            
+            if des3=="si":
                 d3=random.randint(1,6)
-                print('valor 3= ' + str(d3))
-            if des4=='si':
+            print('valor 3= ' + str(d3))
+            
+            if des4=="si":
                 d4=random.randint(1,6)
-                print ('valor 4= ' + str(d4))
-            if des5=='si':
+            print ('valor 4= ' + str(d4))
+            
+            if des5=="si":
                 d5=random.randint(1,6)
-                print ('valor 5= ' + str(d5))
+            print ('valor 5= ' + str(d5))
+            
         dados=[d1,d2,d3,d4,d5]
         turno-=1
         return turno,dados    
