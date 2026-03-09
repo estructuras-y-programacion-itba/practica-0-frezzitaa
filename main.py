@@ -27,7 +27,7 @@ def poker(lista):
         for i in range(len(lista)):
             if numero==lista[i]:
                 contador+=1
-                if contador==4:
+                if contador >= 4:
                     poker=True
                     
     return poker
@@ -122,13 +122,6 @@ def juego_terminado(listaj1, listaj2):
     return False
 
 
-def registrar_combinacion(combinacion_elegida, combinaciones_usadas):
-    if combinacion_elegida not in   combinaciones_usadas:
-        combinaciones_usadas.append(combinacion_elegida)    
-    return combinaciones_usadas
-    
-
-
 def guardar_csv(planilla_j1, planilla_j2):
     categorias = ['E', 'F', 'P', 'G', '1', '2', '3', '4', '5', '6']
     with open('jugadas.csv', 'w') as f:
@@ -139,6 +132,8 @@ def guardar_csv(planilla_j1, planilla_j2):
             f.write(f"{cat},{p1},{p2}\n")
 
 def main(): 
+
+    #usamos diccionarios para relacionar los puntos obtenidos con su correspondiente categoria
     planilla_j1 = {}
     planilla_j2 = {}
     
@@ -149,7 +144,10 @@ def main():
 
     while not juego_terminado(planilla_j1, planilla_j2):
         for j in range(1, 3):
-            planilla_actual = planilla_j1 if j == 1 else planilla_j2
+            if j == 1:
+                planilla_actual = planilla_j1
+            else:
+                planilla_actual = planilla_j2
             
             #si el jugador ya lleno sus 10 categorias salteamos su turno
             if len(planilla_actual) == 10:
@@ -159,7 +157,7 @@ def main():
             tirada_final, dados = tiradas()
             
             #servido: lograr la jugada en el primer tiro sin volver a tirar ningun dado
-            es_servido = (tirada_final == 1)
+            es_servido = (tirada_final == 1) #devuelve booleano
             
             print(f"Dados finales del Jugador {j}: {dados}")
 
@@ -168,27 +166,38 @@ def main():
                 print(f"¡GENERALA REAL! El Jugador {j} gana automáticamente.")
                 planilla_actual['G'] = 80 
                 guardar_csv(planilla_j1, planilla_j2)
-                return 
+                
+                total_j1 = sum(planilla_j1.values()) 
+                total_j2 = sum(planilla_j2.values()) 
+                
+                print("\n--- FIN DEL JUEGO ---")
+                print(f"Puntaje Final J1: {total_j1}")
+                print(f"Puntaje Final J2: {total_j2}")
+                return
 
             #mostrar opciones y elegir categoria
-            disponibles = [c for c in (categorias_numeros + categorias_mayores) if c not in planilla_actual]
+            disponibles = [c for c in (categorias_numeros + categorias_mayores) if c not in planilla_actual] #con append me llevaba 4 lineas de codigo lo escribo asi para resumir 
             print(f"Categorías pendientes: {disponibles}")
             
             eleccion = input("Elija categoría para anotar: ").upper()
             while eleccion not in disponibles:
                 eleccion = input("Invalida o ya usada. Elija de nuevo: ").upper()
 
-            #calcular puntos. arranca en 0 por si elige una categoria pero no tiene la jugada (tachar)
+            #calcular puntos. arranca en 0 por si elige una categoria pero no tiene la jugada
             puntos = 0 
             
             if eleccion == 'G':
-                if generala(dados): puntos = 50
+                if generala(dados): 
+                    puntos = 50
             elif eleccion == 'P':
-                if poker(dados): puntos = 40 + (5 if es_servido else 0)
+                if poker(dados): 
+                    puntos = 40 + (5 if es_servido else 0)
             elif eleccion == 'F':
-                if full(dados): puntos = 30 + (5 if es_servido else 0)
+                if full(dados): 
+                    puntos = 30 + (5 if es_servido else 0)
             elif eleccion == 'E':
-                if escalera(dados): puntos = 20 + (5 if es_servido else 0)
+                if escalera(dados):
+                    puntos = 20 + (5 if es_servido else 0)
             elif eleccion in categorias_numeros:
                 totales_num = numero_ind(dados)
                 puntos = totales_num[int(eleccion) - 1]
@@ -199,8 +208,8 @@ def main():
             print(f"Anotado: {puntos} puntos en la categoría {eleccion}.")
 
     #fin del juego por planillas completas
-    total_j1 = sum(planilla_j1.values())
-    total_j2 = sum(planilla_j2.values())
+    total_j1 = sum(planilla_j1.values()) #el values me da una lista con los valores (osea los puntos) de cada categoria
+    total_j2 = sum(planilla_j2.values()) #sum da la suma de todos los elementos de la lista values
     
     print("\n--- FIN DEL JUEGO ---")
     print(f"Puntaje Final J1: {total_j1}")
